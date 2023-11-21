@@ -68,6 +68,7 @@ def SelectionHandle(selection):
         isServer=True
     elif selection =='Client':
         isServer=False
+    print(selection)
 # Espera conexão do servidor
 def WaitConnection():
     global conn, ender,server,isConnected
@@ -198,6 +199,10 @@ def Receive():
                     textCript.config(text='Criptografado: '+ArrayBitsToStringBits(criptArray))
                 else:
                     textCript.config(text='Sem Criptografia')
+                for i in range(len(lineCodeArray)/2):
+                    aux=lineCodeArray[i]
+                    lineCodeArray[i]=lineCodeArray[len(lineCodeArray)-1-i]
+                    lineCodeArray[len(lineCodeArray)-1-i] = aux
                 textLineCode.config(text='4D_Pam5 (V): '+str(lineCodeArray))
                 window.geometry('400x500')
                 lineCodeArray=lineCodeArray
