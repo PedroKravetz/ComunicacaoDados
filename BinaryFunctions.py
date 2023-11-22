@@ -42,7 +42,6 @@ def Encode4D_Pam5(binaryArray=[]):
 # Gera um array de bits a partir de um array no line code 4D-Pam5
 def Decode4D_Pam5(data4d=[]):
     result=[]
-    positivo = True
     for i in data4d:
         if i==-2:
             result.append(0)

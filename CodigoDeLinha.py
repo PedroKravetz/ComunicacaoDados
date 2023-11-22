@@ -9,13 +9,15 @@ from BinaryFunctions import *
 ## Gráfico
 
 # Retorna fig do grafico
-def Show2B1Q(array2b1q=[]):
+def Show4D_PAM5(array4D_PAM5=[]):
     fig,ax = plt.subplots(figsize=(8,4)) # Faz subplot
-    lenght = len(array2b1q) # Tamanho de Array
+    lenght = len(array4D_PAM5) # Tamanho de Array
+    if not isServer:
+        array4D_PAM5 = array4D_PAM5[::-1]
     n = 200 # Samples por bit
     bitDuration = 1 # Duração em s do bit
     wave = np.array([]) # Onda inicialização
-    for i in array2b1q:
+    for i in array4D_PAM5:
         bitData = np.array([i]*n) # Coloca o valor do array na posição n vezes
         wave = np.concatenate((wave,bitData)) # Concatena
     time = np.arange(0,lenght*bitDuration,bitDuration/n)
@@ -33,7 +35,7 @@ def ShowLineCode():
         if(fig):
             plt.close(fig)
         
-        fig = Show2B1Q(lineCodeArray)
+        fig = Show4D_PAM5(lineCodeArray)
         canvas = FigureCanvasTkAgg(fig,textFrame)
         canvas.draw()
         canvas.get_tk_widget().pack()
@@ -68,7 +70,6 @@ def SelectionHandle(selection):
         isServer=True
     elif selection =='Client':
         isServer=False
-    print(selection)
 # Espera conexão do servidor
 def WaitConnection():
     global conn, ender,server,isConnected
@@ -199,10 +200,6 @@ def Receive():
                     textCript.config(text='Criptografado: '+ArrayBitsToStringBits(criptArray))
                 else:
                     textCript.config(text='Sem Criptografia')
-                for i in range(len(lineCodeArray)/2):
-                    aux=lineCodeArray[i]
-                    lineCodeArray[i]=lineCodeArray[len(lineCodeArray)-1-i]
-                    lineCodeArray[len(lineCodeArray)-1-i] = aux
                 textLineCode.config(text='4D_Pam5 (V): '+str(lineCodeArray))
                 window.geometry('400x500')
                 lineCodeArray=lineCodeArray
