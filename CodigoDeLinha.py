@@ -9,6 +9,7 @@ from BinaryFunctions import *
 ## Gráfico
 
 # Retorna fig do grafico
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 def Show4D_PAM5(array4D_PAM5=[]):
     fig,ax = plt.subplots(figsize=(8,4)) # Faz subplot
     lenght = len(array4D_PAM5) # Tamanho de Array
@@ -26,6 +27,7 @@ def Show4D_PAM5(array4D_PAM5=[]):
     return fig
 
 # Mostra o Gráfico se houver data a mostrar, caso tenha mostrado, retira de coisas a mostrar
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 def ShowLineCode():
     global isRunning,lineCodeArray,canvas,fig
 
@@ -45,6 +47,7 @@ def ShowLineCode():
         window.after(200,ShowLineCode)
 
 # Fecha Janela
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 def CloseWindow():
     global isRunning
     print('Janela fechando')
@@ -64,13 +67,16 @@ def CloseWindow():
     window.destroy()
 
 # Seleção de Cliente ou Server
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 def SelectionHandle(selection):
     global isServer
     if(selection == 'Server'):
         isServer=True
     elif selection =='Client':
         isServer=False
+
 # Espera conexão do servidor
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 def WaitConnection():
     global conn, ender,server,isConnected
     while(isConnected==False and isRunning==True):
@@ -85,6 +91,7 @@ def WaitConnection():
             print("Nao conseguiu conexoes.")
 
 # Botão de conexão, prepara em caso de Server ou Client
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 def Iniciar():
     global server,client,isServer,host
     host = entryId.get()
@@ -112,6 +119,7 @@ def Iniciar():
         thread2 = threading.Thread(target=Receive)
         thread2.start()
 
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 def encrypt_caesar_cipher(text):
     encrypted_text = ""
     for char in text:
@@ -124,6 +132,7 @@ def encrypt_caesar_cipher(text):
             encrypted_text += char
     return encrypted_text
 
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 def decrypt_caesar_cipher(text):
     decrypted_text = ""
     for char in text:
@@ -138,6 +147,7 @@ def decrypt_caesar_cipher(text):
 
 
 # Envia os dados, e atualiza o display
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 def Send():
     global canvas, isConnected, fig, lineCodeArray, criptography
     text = textEntry.get()
@@ -172,6 +182,7 @@ def Send():
     lineCodeArray=lineCode_array
 
 # Tenta receber os dados e mostrá-los em tela a cada 200ms.
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 def Receive():
     global canvas, isConnected,fig,lineCodeArray, criptography
     
@@ -208,6 +219,7 @@ def Receive():
             pass
 
 # Inicialização de variaveis para servidor e outros
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 PORT = 55555
 host = 'localhost'
 server = None
@@ -218,11 +230,13 @@ isConnected,isRunning = False, True
 lineCodeArray = []
 
 # Inicializacao da tela
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 window = tk.Tk()
 window.geometry('400x130')
 window.protocol('WM_DELETE_WINDOW',CloseWindow)
 
 # Display da Tela inicial
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 ipFrame = tk.Frame(window)
 selectedOption = tk.StringVar()
 selectedOption.set('Server')
@@ -234,6 +248,7 @@ entryId.insert(0,'127.0.0.1')
 buttonAccept=tk.Button(ipFrame,text='Conectar',command=Iniciar)
 
 # Tela de adição de dados Envio
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 textFrame = tk.Frame(window)
 criptography=tk.BooleanVar() # Bool que controla criptografia
 criptography.set(False)
@@ -247,6 +262,7 @@ textLineCode = tk.Label(textFrame,text='4D_Pam5 (V) : ')
 textButton = tk.Button(textFrame,text='Enviar',command=Send)
 
 # Adição de itens ao Frame, tela secundária
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 selectCriptography.pack()
 textLabel.pack()
 textEntry.pack()
@@ -257,13 +273,16 @@ textLineCode.pack()
 textButton.pack()
 
 # Adição de itens ao Frame, tela inicial
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 options.pack()
 label.pack()
 entryId.pack()
 buttonAccept.pack()
 
 # Adição do frame inicial a window geral
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 ipFrame.pack()
 
 # Inicialização do loop principal
+# Ele foi baseado no código disponível em https://github.com/walger-lucas/ComunicacaoDados
 window.mainloop()
